@@ -4,12 +4,11 @@
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
-- Introduction
+- [Introduction](#introduction)
 - [Setup](#setup)
   - [Requirements](#requirements)
   - [Install package](#install-package)
 - [Usage](#usage)
-  - [Quick start](#quick-start)
 
 ## Introduction
 
