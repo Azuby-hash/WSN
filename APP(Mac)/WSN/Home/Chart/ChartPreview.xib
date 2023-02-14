@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="mac" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChartPreview" customModule="WSN" customModuleProvider="target">
+            <connections>
+                <outlet property="chartList" destination="Z9S-1a-YNp" id="aAT-0Q-VeC"/>
+                <outlet property="tableList" destination="vfg-4p-57W" id="eEx-20-Nsz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UIViewPointSubview" customModule="WSN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="cPP-d0-CSj" customClass="UIStackViewForwardPointSubview" customModule="WSN" customModuleProvider="target">
+                    <rect key="frame" x="80" y="120" width="640" height="480"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NgF-cy-lJ4">
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="BB4-Me-myG" customClass="UIStackViewForwardPointSubview" customModule="WSN" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="640" height="160"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Z9S-1a-YNp" customClass="UIStackViewForwardPointSubview" customModule="WSN" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lHH-wR-hVB" userLabel="Temp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
+                                                    <color key="backgroundColor" white="0.099935609977562109" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="qQM-Zo-6il"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="vfg-4p-57W" customClass="UIStackViewForwardPointSubview" customModule="WSN" customModuleProvider="target">
+                                            <rect key="frame" x="340" y="0.0" width="300" height="160"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZE-oH-OMV" userLabel="Temp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
+                                                    <color key="backgroundColor" white="0.099935609980000006" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="awO-MX-52h"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="BB4-Me-myG" firstAttribute="top" secondItem="NgF-cy-lJ4" secondAttribute="top" id="Bbl-EV-bVm"/>
+                                <constraint firstItem="BB4-Me-myG" firstAttribute="width" secondItem="NgF-cy-lJ4" secondAttribute="width" id="KQV-a4-dgq"/>
+                                <constraint firstItem="BB4-Me-myG" firstAttribute="leading" secondItem="NgF-cy-lJ4" secondAttribute="leading" id="PDi-u9-ZvP"/>
+                                <constraint firstAttribute="bottom" secondItem="BB4-Me-myG" secondAttribute="bottom" constant="30" id="Zh6-lO-Q8j"/>
+                                <constraint firstAttribute="trailing" secondItem="BB4-Me-myG" secondAttribute="trailing" id="q8O-HA-RuK"/>
+                            </constraints>
+                            <viewLayoutGuide key="contentLayoutGuide" id="DCY-xU-pJL"/>
+                            <viewLayoutGuide key="frameLayoutGuide" id="kEa-b8-d3i"/>
+                        </scrollView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cPP-d0-CSj" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="4mA-rd-QG6"/>
+                <constraint firstItem="cPP-d0-CSj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="120" id="N65-Ld-JNZ"/>
+                <constraint firstItem="cPP-d0-CSj" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="gM4-sY-ia9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cPP-d0-CSj" secondAttribute="bottom" id="oRu-hO-Yso"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="56"/>
+        </view>
+    </objects>
+</document>

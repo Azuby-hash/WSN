@@ -1,0 +1,3 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/LAN/.pio/libdeps/nodemcu-32s/ESPAsyncWebServer-esphome"
+}
