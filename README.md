@@ -1,6 +1,6 @@
 # WIRELESS SENSOR NETWORK (WSN)
 
-## Author: Le Thanh Hai (Azuby)
+## Author: Azuby
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -20,11 +20,11 @@
  
 ### Requirements 
 
-- Visual Studio Code
-- Platform IO (or Arduino IDE)
-- NodeJS
-- Xcode(Optional for run App)
-- Esptouch (for SmartConfig)
+- [Visual Studio Code](https://code.visualstudio.com/Download)
+- [Platform IO](https://platformio.org/install/ide?install=vscode) (or Arduino IDE)
+- [NodeJS](https://nodejs.org/en/download/)
+- [Xcode](https://developer.apple.com/xcode/) (Optional for run App)
+- Esptouch on phone (for SmartConfig) 
 
 ### Install Package
 
