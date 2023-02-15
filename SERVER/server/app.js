@@ -30,12 +30,20 @@ app.post(`/espPost`, (req, res) => {
             const json = JSON.parse(data);
             
             var key = `esp${number + 1}`
+            var sup = `espSP${number + 1}`
             if (isSP) {
                 key = `espSP${number + 1}`
+                sup = `esp${number + 1}`
             }
             // espSP3
             // console.log(key);
             console.log(value);
+
+            if (json[key] == undefined) {
+                json[key] = [];
+                json[sup] = [];
+            }
+
             json[key] = [...json[key], {value: value, date: Date.now() / 1000}]
 
             // console.log(json[key]);
