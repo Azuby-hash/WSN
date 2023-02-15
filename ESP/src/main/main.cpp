@@ -6,9 +6,22 @@
 #include <DallasTemperature.h>
 
 #define NODE_ID 1 // From 1 to n
+#define SLEEP_TIME_MEASURE 14
 
 unsigned long _time = 0;
 unsigned long _time2 = 0;
+
+enum STATE {
+  STATE_DISABLE, STATE_CLICK, STATE_ENABLE
+};
+
+RTC_DATA_ATTR bool _isFirstTime = true;
+RTC_DATA_ATTR STATE _state = STATE_DISABLE; 
+/**
+ * STATE_DISABLE: chưa nhấn nút, chưa đợi cảm biến nóng
+ * STATE_CLICK: đã nhấn nút, chưa đợi cảm biến nóng
+ * STATE_ENABLE: đã nhấn nút, cảm biến đủ nóng (sau 14s)
+*/
 
 // Config chế độ đọc tín hiệu 1 dây
 OneWire oneWire(4);
@@ -42,25 +55,58 @@ void setup() {
 
   // Đèn D2 sáng trong thời gian thức
   pinMode(2, OUTPUT);
+
+  pinMode(0, OUTPUT);
+  digitalWrite(0, HIGH);
+  pinMode(0, INPUT_PULLUP);
   digitalWrite(2, HIGH);
 
   // In ra lý do thức dậy
   print_wakeup_reason();
 
-  // Cài đặt thời gian ngủ
-  esp_sleep_enable_timer_wakeup(6 * 1000000);
+  Serial.println(_state);
+
+  if (_state == STATE_DISABLE) {
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 0);
+    esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+
+    _state = STATE_CLICK;
+    Serial.flush(); 
+    esp_deep_sleep_start();
+    return;
+  }
+
+  if (_isFirstTime) {
+    _isFirstTime = false;
+    _state = STATE_DISABLE;
+    setup();
+    return;
+  }
+
+  if (_state == STATE_CLICK) {
+    // Cài đặt thời gian ngủ
+    esp_sleep_enable_timer_wakeup(SLEEP_TIME_MEASURE * 1000000);
+    esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_EXT0);
+
+    _state = STATE_ENABLE;
+    Serial.flush(); 
+    esp_deep_sleep_start();
+  }
 
   // Smart config wifi và xác định địa chỉ IP của server
   wifiSmartConfig();
-
-  // Đo nhiệt độ và lưu giá trị
-  sensors.requestTemperatures(); 
-  temperatureC = sensors.getTempCByIndex(0);
 }
 
 void loop() {
-  if (millis() - _time > 1000) {
+  if (millis() - _time > 500) {
     _time = millis();
+
+    // Đo nhiệt độ và lưu giá trị
+    sensors.requestTemperatures(); 
+    temperatureC = sensors.getTempCByIndex(0);
+    if (temperatureC < 0.1) { 
+      return;
+    }
 
     // String request để đẩy giá trị lên server
     String reqString = "http://" + server + "/espPost";
@@ -78,6 +124,10 @@ void loop() {
 
     // Xóa bộ nhớ và ngủ
     Serial.flush(); 
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 1);
+    esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+
+    _state = STATE_DISABLE;
     esp_deep_sleep_start();
   }
 }
