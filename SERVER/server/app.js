@@ -41,7 +41,7 @@ app.post(`/espPost`, (req, res) => {
 
             if (json[key] == undefined) {
                 json[key] = [];
-                json[sup] = [];
+                json[sup] = [40];
             }
 
             json[key] = [...json[key], {value: value, date: Date.now() / 1000}]
@@ -67,6 +67,23 @@ app.post('/espGet', (req, res) => {
     if (pass == password) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Content-type,Accept');
+
+        if (req.body.number != undefined && req.body.isSP!= undefined) {
+
+            const number = req.body.number - 1
+            const isSP = req.body.isSP
+
+            const json = JSON.parse(fs.readFileSync('server/data.json', 'utf8'));
+            if (json[`esp${isSP ? "SP" : ""}${number + 1}`] != undefined) { 
+                const values = json[`esp${isSP ? "SP" : ""}${number + 1}`].sort((a, b) => a.date < b.date)
+                res.send(values[values.length - 1] == undefined ? "Unavailable" : `${values[values.length - 1].value}`)
+                return
+            } else {
+                res.send("Unavailable")
+                return
+            }
+        }
+
         res.send(fs.readFileSync('server/data.json', 'utf8'))
     } else {
         res.header('Access-Control-Allow-Origin', '*');

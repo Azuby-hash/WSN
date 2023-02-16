@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HW8-Ov-6n9" userLabel="SetPoint" customClass="SPPreview" customModule="WSN" customModuleProvider="target">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HW8-Ov-6n9" userLabel="SetPoint" customClass="SPPreview" customModule="WSN" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -210,6 +210,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="exportExcel:" destination="uz3-pB-YmE" eventType="touchUpInside" id="hWb-Yl-hvr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

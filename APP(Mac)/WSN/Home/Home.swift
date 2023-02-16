@@ -19,9 +19,22 @@ extension CALayer {
 }
 
 class Home: UIViewController {
+    
+    private let path: URL = {
+        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("data.xml")
+        else { return URL(fileURLWithPath: ".") }
+
+        return path
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func exportExcel(_ sender: Any) {
+        for temp in ModelManager.shared.getStorage().getAllStorage() {
+            
+        }
     }
 }
 

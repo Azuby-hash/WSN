@@ -47,6 +47,14 @@ class Storage {
         }
     }
     
+    func getAllStorage() -> [StorageValueCollection] {
+        return temp
+    }
+    
+    func getAllSetPoint() -> [StorageSetPoint] {
+        return tempSP
+    }
+    
     func getStorage(of number: Int) -> StorageValueCollection {
         return temp[number]
     }

@@ -4,6 +4,7 @@
 #include <smartConfig.h> 
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <ArduinoJson.h>
 
 #define NODE_ID 1 // From 1 to n
 #define SLEEP_TIME_MEASURE 14
@@ -29,6 +30,9 @@ OneWire oneWire(4);
 // Tạo 1 handler đo thông qua dây đã config
 DallasTemperature sensors(&oneWire);
 
+// Parse json thành object
+DynamicJsonDocument doc(1024);
+
 // Biến lưu trữ nhiệt độ
 float temperatureC = 0;
 
@@ -50,16 +54,33 @@ void print_wakeup_reason(){
   }
 }
 
+void ledEnableHoldState() {
+  gpio_hold_en(GPIO_NUM_25);
+  gpio_hold_en(GPIO_NUM_26);
+  gpio_hold_en(GPIO_NUM_27);
+}
+
+void ledDisableHoldState() {
+  gpio_hold_dis(GPIO_NUM_25);
+  gpio_hold_dis(GPIO_NUM_26);
+  gpio_hold_dis(GPIO_NUM_27);
+}
+
 void setup() {
   Serial.begin(115200);
 
   // Đèn D2 sáng trong thời gian thức
   pinMode(2, OUTPUT);
+  pinMode(25, OUTPUT);
+  pinMode(26, OUTPUT);
+  pinMode(27, OUTPUT);
 
   pinMode(0, OUTPUT);
   digitalWrite(0, HIGH);
   pinMode(0, INPUT_PULLUP);
   digitalWrite(2, HIGH);
+
+  ledDisableHoldState();
 
   // In ra lý do thức dậy
   print_wakeup_reason();
@@ -72,6 +93,7 @@ void setup() {
 
     _state = STATE_CLICK;
     Serial.flush(); 
+    ledEnableHoldState();
     esp_deep_sleep_start();
     return;
   }
@@ -90,6 +112,7 @@ void setup() {
 
     _state = STATE_ENABLE;
     Serial.flush(); 
+    ledEnableHoldState();
     esp_deep_sleep_start();
   }
 
@@ -108,26 +131,62 @@ void loop() {
       return;
     }
 
-    // String request để đẩy giá trị lên server
-    String reqString = "http://" + server + "/espPost";
+    // String request để đẩy giá trị lên server ------------------------------
+    String reqString1 = "http://" + server + "/espPost";
 
     // JSON chứa index node hiện tại, giá trị và bảo mật cần gửi
-    String json = "{\"number\":" + (String)NODE_ID + ",\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\", \"value\":" ;
-    json = json + temperatureC;
-    json = json + "}";
+    String json1 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\", \"value\":" ;
+    json1 = json1 + temperatureC;
+    json1 = json1 + "}";
 
     // Request post lên server
-    String resString = httpPOSTRequest(reqString, json);
+    String resString1 = httpPOSTRequest(reqString1, json1);
 
     // In ra response trả về từ server
-    Serial.println(resString);
+    Serial.println(resString1);
+
+    // String request để lấy giá trị từ server -------------------------------
+    String reqString2 = "http://" + server + "/espGet";
+
+    // JSON chứa bảo mật cần gửi
+    String json2 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\", \"isSP\": true}" ;
+
+    // Request post lên server
+    String resString2 = httpPOSTRequest(reqString2, json2);
+    
+    // Response trả về setpoint, convert ra float
+    deserializeJson(doc, resString2);
+    float sp = doc.as<float>();
+
+    // So sánh với giá trị hiện tại
+    if (sp <= temperatureC) {
+      digitalWrite(25, HIGH);
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+    }
+
+    if (sp > temperatureC && (sp - temperatureC) < 10) {
+      digitalWrite(25, LOW);
+      digitalWrite(26, HIGH);
+      digitalWrite(27, LOW);
+    }
+
+    if (sp > temperatureC && (sp - temperatureC) < 20) {
+      digitalWrite(25, LOW);
+      digitalWrite(26, LOW);
+      digitalWrite(27, HIGH);
+    }
+
+    // In ra response trả về từ server
+    Serial.println(resString2);
 
     // Xóa bộ nhớ và ngủ
-    Serial.flush(); 
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 1);
     esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
 
     _state = STATE_DISABLE;
+    Serial.flush(); 
+    ledEnableHoldState();
     esp_deep_sleep_start();
   }
 }
