@@ -78,8 +78,6 @@ void setup() {
   pinMode(0, INPUT_PULLUP);
   digitalWrite(2, HIGH);
 
-  ledDisableHoldState();
-
   // In ra lý do thức dậy
   print_wakeup_reason();
 
@@ -155,6 +153,8 @@ void loop() {
     // Response trả về setpoint, convert ra float
     deserializeJson(doc, resString2);
     float sp = doc.as<float>();
+
+    ledDisableHoldState();
 
     // So sánh với giá trị hiện tại
     if (sp <= temperatureC) {
