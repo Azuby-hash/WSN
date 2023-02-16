@@ -19,22 +19,32 @@ extension CALayer {
 }
 
 class Home: UIViewController {
-    
-    private let path: URL = {
-        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("data.xml")
-        else { return URL(fileURLWithPath: ".") }
-
-        return path
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func exportExcel(_ sender: Any) {
-        for temp in ModelManager.shared.getStorage().getAllStorage() {
-            
+    @IBAction func exportExcel(_ button: UIButton) {
+        let exporter = ExportXlsxService.init()
+        exporter.export()
+
+        let url = NSURL.fileURL(withPath: "\(exporter.filePath())/\(exporter.filename)")
+        
+        let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = button
+        ac.popoverPresentationController?.sourceRect = button.bounds
+        ac.completionWithItemsHandler = { _, success, _, _ in
+            DispatchQueue.main.async{ self.saveImageFinish(success) }
         }
+        
+        present(ac, animated: true)
+    }
+    
+    func saveImageFinish(_ success: Bool) {
+        let alert = UIAlertController(title: success ? "Saved" : "Error",
+                                      message: success ? "Excel is exported!" : "Error export!",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK, got it", style: .default) { _ in })
+        present(alert, animated: true)
     }
 }
 

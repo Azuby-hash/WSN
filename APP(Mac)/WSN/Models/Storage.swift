@@ -114,6 +114,10 @@ class StorageValueCollection {
         }
     }
     
+    func getAllValues() -> [StorageValue] {
+        return values
+    }
+    
     func getUnloopValues() -> [StorageValue] {
         var values = [StorageValue]()
         
