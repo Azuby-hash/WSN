@@ -16,6 +16,9 @@ OneWire oneWire(4);
 // Tạo 1 handler đo thông qua dây đã config
 DallasTemperature sensors(&oneWire);
 
+// Doc parse json thành object
+DynamicJsonDocument doc(1024);
+
 // Biến lưu trữ nhiệt độ
 float temperatureC = 0;
 
