@@ -4,6 +4,7 @@
 #include <smartConfig.h> 
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <ArduinoJson.h>
 
 #define NODE_ID 1 // From 1 to n
 
@@ -40,17 +41,36 @@ void print_wakeup_reason(){
   }
 }
 
+void ledEnableHoldState() {
+  gpio_hold_en(GPIO_NUM_25);
+  gpio_hold_en(GPIO_NUM_26);
+  gpio_hold_en(GPIO_NUM_27);
+}
+
+void ledDisableHoldState() {
+  gpio_hold_dis(GPIO_NUM_25);
+  gpio_hold_dis(GPIO_NUM_26);
+  gpio_hold_dis(GPIO_NUM_27);
+}
+
 void setup() {
   Serial.begin(115200);
+
+  pinMode(25, OUTPUT);
+  pinMode(26, OUTPUT);
+  pinMode(27, OUTPUT);
 
   // Đèn D2 sáng trong thời gian thức
   pinMode(2, OUTPUT);
   digitalWrite(2, HIGH);
 
+  pinMode(0, INPUT_PULLUP);
+
   // In ra lý do thức dậy
   print_wakeup_reason();
 
   // Cài đặt thời gian ngủ
+  esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_EXT0);
   esp_sleep_enable_timer_wakeup(6 * 1000000);
 
   // Smart config wifi và xác định địa chỉ IP của server
@@ -58,6 +78,17 @@ void setup() {
 }
 
 void loop() {
+  if (digitalRead(0) == LOW) {
+    delay(50);
+
+    while (digitalRead(0) == LOW);
+
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 0);
+    esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+
+    Serial.flush(); 
+    esp_deep_sleep_start();
+  }
   if (millis() - _time > 500) {
     _time = millis();
 
@@ -95,6 +126,8 @@ void loop() {
     deserializeJson(doc, resString2);
     float sp = doc.as<float>();
 
+    ledDisableHoldState();
+
     // So sánh với giá trị hiện tại
     if (sp <= temperatureC) {
       digitalWrite(25, HIGH);
@@ -119,6 +152,7 @@ void loop() {
 
     // Xóa bộ nhớ và ngủ
     Serial.flush(); 
+    ledEnableHoldState();
     esp_deep_sleep_start();
   }
 }
