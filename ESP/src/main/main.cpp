@@ -96,13 +96,6 @@ void setup() {
     return;
   }
 
-  if (_isFirstTime) {
-    _isFirstTime = false;
-    _state = STATE_DISABLE;
-    setup();
-    return;
-  }
-
   if (_state == STATE_CLICK) {
     // Cài đặt thời gian ngủ
     esp_sleep_enable_timer_wakeup(SLEEP_TIME_MEASURE * 1000000);
