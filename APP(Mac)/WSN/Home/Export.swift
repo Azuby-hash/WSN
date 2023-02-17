@@ -19,7 +19,6 @@ class ExportXlsxService {
     var format_1: UnsafeMutablePointer<lxw_format>?
     
     private var writingLine: UInt32 = 0
-    private var writingBonus: UInt16 = 0
     private var needWriterPreparation = false
     
     init() {
@@ -44,7 +43,6 @@ class ExportXlsxService {
         var destination_path = filePath()
         destination_path = destination_path + "/\(filename)"
         workbook = workbook_new(destination_path)
-        worksheet = workbook_add_worksheet(workbook, nil)
         // Add style
         format_header = workbook_add_format(workbook)
         format_set_bold(format_header)
@@ -57,11 +55,12 @@ class ExportXlsxService {
     }
     
     /// The first line is the header, we use bold style, and we write the column titles
-    private func buildHeader() {
+    private func buildHeader(name: String) {
+        worksheet = workbook_add_worksheet(workbook, name)
+
         writingLine = 0
-        worksheet_write_string(worksheet, writingLine, writingBonus, "ID", format_header)
-        worksheet_write_string(worksheet, writingLine, writingBonus + 1, "Temperature", format_header)
-        worksheet_write_string(worksheet, writingLine, writingBonus + 2, "Measure time", format_header)
+        worksheet_write_string(worksheet, writingLine, 0, "Temperature", format_header)
+        worksheet_write_string(worksheet, writingLine, 1, "Measure time", format_header)
     }
     
     /// Create and write / overwrite the xlsx file
@@ -74,13 +73,12 @@ class ExportXlsxService {
             if col.element.getAllValues().count < 1 {
                 return
             }
-            
-            buildHeader()
+
+            buildHeader(name: "ESP\(col.offset + 1)")
             for value in col.element.getAllValues() {
                 buildNewLine(product: ESP(number: col.offset + 1, value: value.getValue(), date: value.getDate()))
             }
             writingLine = 0
-            writingBonus = writingBonus + 4
         }
     
         // Closing the workbook will save the xlsx file on the filesystem
@@ -95,13 +93,12 @@ class ExportXlsxService {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss dd-MM-yyyy"
-        
-        worksheet_write_string(worksheet, writingLine, writingBonus, "ESP\(product.number)", format_1)
-        worksheet_write_string(worksheet, writingLine, writingBonus + 1, "\(product.value)", format_1)
-        worksheet_write_string(worksheet, writingLine, writingBonus + 2, dateFormatter.string(from: product.date), format_1)
-        
-        worksheet_set_column(worksheet, writingBonus + 1, writingBonus + 1, 11, format_1)
-        worksheet_set_column(worksheet, writingBonus + 2, writingBonus + 2, 24, format_1)
+
+        worksheet_write_string(worksheet, writingLine, 0, "\(product.value)", format_1)
+        worksheet_write_string(worksheet, writingLine, 1, dateFormatter.string(from: product.date), format_1)
+
+        worksheet_set_column(worksheet, 0, 0, 11, format_1)
+        worksheet_set_column(worksheet, 1, 1, 24, format_1)
     }
     
 }
