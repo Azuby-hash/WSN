@@ -74,6 +74,8 @@ void setup() {
   pinMode(25, OUTPUT);
   pinMode(26, OUTPUT);
   pinMode(27, OUTPUT);
+  pinMode(5, OUTPUT);
+  digitalWrite(5, LOW); 
 
   pinMode(0, INPUT_PULLUP);
   digitalWrite(2, HIGH);
