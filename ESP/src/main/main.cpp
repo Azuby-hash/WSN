@@ -59,6 +59,8 @@ void setup() {
   pinMode(25, OUTPUT);
   pinMode(26, OUTPUT);
   pinMode(27, OUTPUT);
+  pinMode(5, OUTPUT);
+  digitalWrite(5, LOW);
 
   // Đèn D2 sáng trong thời gian thức
   pinMode(2, OUTPUT);
