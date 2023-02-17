@@ -210,6 +210,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="exportExcel:" destination="uz3-pB-YmE" eventType="touchUpInside" id="u2I-iS-E7r"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

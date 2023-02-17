@@ -44,6 +44,7 @@
 		726E01732995202300F6D208 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726E01632995202300F6D208 /* ModelManager.swift */; };
 		726E01742995202300F6D208 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726E01642995202300F6D208 /* Color.swift */; };
 		729873EA299BC4AE000034FE /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729873E9299BC4AE000034FE /* ServerConfig.swift */; };
+		72A197AD299F527A000BEF60 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A197AC299F527A000BEF60 /* Export.swift */; };
 		72BBB8192997B33A006984CE /* SetPoint.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72BBB8182997B33A006984CE /* SetPoint.xib */; };
 		72BBB81B2997B345006984CE /* SetPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBB81A2997B345006984CE /* SetPoint.swift */; };
 		BF504593BF53EB3EF6794740 /* Pods_WSN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F35B5A5F03421428121316A9 /* Pods_WSN.framework */; };
@@ -91,6 +92,7 @@
 		726E01632995202300F6D208 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		726E01642995202300F6D208 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		729873E9299BC4AE000034FE /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
+		72A197AC299F527A000BEF60 /* Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
 		72BBB8182997B33A006984CE /* SetPoint.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetPoint.xib; sourceTree = "<group>"; };
 		72BBB81A2997B345006984CE /* SetPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPoint.swift; sourceTree = "<group>"; };
 		F35B5A5F03421428121316A9 /* Pods_WSN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WSN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 			children = (
 				7237E5AF29937D4800F18D49 /* Main.storyboard */,
 				7237E5AD29937D4800F18D49 /* Home.swift */,
+				72A197AC299F527A000BEF60 /* Export.swift */,
 				726E013729951FCA00F6D208 /* TabSegment.swift */,
 				729873E9299BC4AE000034FE /* ServerConfig.swift */,
 				726E013829951FCB00F6D208 /* Chart */,
@@ -381,6 +384,7 @@
 				726E014A29951FCB00F6D208 /* Chart.swift in Sources */,
 				726E014B29951FCB00F6D208 /* ChartDraw.swift in Sources */,
 				726E015029951FCB00F6D208 /* SPPreview.swift in Sources */,
+				72A197AD299F527A000BEF60 /* Export.swift in Sources */,
 				726E01722995202300F6D208 /* Storage.swift in Sources */,
 				726E016E2995202300F6D208 /* UICollectionViewPointOut.swift in Sources */,
 				726E014829951FCB00F6D208 /* TabSegment.swift in Sources */,

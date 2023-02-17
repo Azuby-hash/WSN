@@ -55,6 +55,14 @@ class Storage {
         return tempSP[number]
     }
     
+    func getAllStorage() -> [StorageValueCollection] {
+        return temp
+    }
+    
+    func getAllSetPoint() -> [StorageSetPoint] {
+        return tempSP
+    }
+    
     func getCount() -> Int {
         return temp.count
     }
@@ -104,6 +112,10 @@ class StorageValueCollection {
         return values.filter { e in
             return valueRange.contains(e.getValue())
         }
+    }
+    
+    func getAllValues() -> [StorageValue] {
+        return values
     }
     
     func getUnloopValues() -> [StorageValue] {

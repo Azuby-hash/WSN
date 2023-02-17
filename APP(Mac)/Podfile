@@ -8,5 +8,6 @@ target 'WSN' do
   # Pods for WSN
 
   pod 'Alamofire', '~> 5.0.0'
+  pod 'libxlsxwriter'
 
 end
