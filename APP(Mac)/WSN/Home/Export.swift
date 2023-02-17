@@ -18,7 +18,6 @@ class ExportXlsxService {
     var format_1: UnsafeMutablePointer<lxw_format>?
 
     private var writingLine: UInt32 = 0
-    private var writingBonus: UInt16 = 0
     private var needWriterPreparation = false
 
     init() {
@@ -79,7 +78,6 @@ class ExportXlsxService {
                 buildNewLine(product: ESP(number: col.offset + 1, value: value.getValue(), date: value.getDate()))
             }
             writingLine = 0
-            writingBonus = writingBonus + 1
         }
 
         // Closing the workbook will save the xlsx file on the filesystem
