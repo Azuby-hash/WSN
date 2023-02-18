@@ -5,8 +5,9 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <ArduinoJson.h>
+#include <main.h>
 
-#define NODE_ID 1 // From 1 to n
+#define NODE_ID 4 // From 1 to n
 #define SLEEP_TIME_MEASURE 14
 
 unsigned long _time = 0;
@@ -57,30 +58,30 @@ void print_wakeup_reason(){
 }
 
 void ledEnableHoldState() {
-  gpio_hold_en(GPIO_NUM_25);
-  gpio_hold_en(GPIO_NUM_26);
-  gpio_hold_en(GPIO_NUM_27);
+  gpio_hold_en(LED_SP_NORMAL);
+  gpio_hold_en(LED_SP_MEDIUM);
+  gpio_hold_en(LED_SP_HIGH);
 }
 
 void ledDisableHoldState() {
-  gpio_hold_dis(GPIO_NUM_25);
-  gpio_hold_dis(GPIO_NUM_26);
-  gpio_hold_dis(GPIO_NUM_27);
+  gpio_hold_dis(LED_SP_NORMAL);
+  gpio_hold_dis(LED_SP_MEDIUM);
+  gpio_hold_dis(LED_SP_HIGH);
 }
 
 void setup() {
   Serial.begin(115200);
 
   // Đèn D2 sáng trong thời gian thức
-  pinMode(2, OUTPUT);
-  pinMode(25, OUTPUT);
-  pinMode(26, OUTPUT);
-  pinMode(27, OUTPUT);
-  pinMode(21, OUTPUT);
-  digitalWrite(21, LOW);
+  pinMode(LED_ON_ACTIVE, OUTPUT);
+  pinMode(LED_SP_NORMAL, OUTPUT);
+  pinMode(LED_SP_MEDIUM, OUTPUT);
+  pinMode(LED_SP_HIGH, OUTPUT);
+  pinMode(LED_ON_REQUEST, OUTPUT);
+  digitalWrite(LED_ON_REQUEST, LOW);
 
-  pinMode(0, INPUT_PULLUP);
-  digitalWrite(2, HIGH);
+  pinMode(BUTTON_MEASURE, INPUT_PULLUP);
+  digitalWrite(LED_ON_ACTIVE, HIGH);
 
   // In ra lý do thức dậy
   print_wakeup_reason();
@@ -88,7 +89,7 @@ void setup() {
   Serial.println(_state);
 
   if (_state == STATE_DISABLE) {
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 0);
+    esp_sleep_enable_ext0_wakeup(BUTTON_MEASURE, 0);
     esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
 
     _state = STATE_CLICK;
@@ -138,7 +139,7 @@ void loop() {
     // In ra response trả về từ server
     Serial.println(resString1);
 
-    // String request để lấy giá trị từ server -------------------------------
+    // String request để lấy set point từ server -------------------------------
     String reqString2 = "http://" + server + "/espGet";
 
     // JSON chứa bảo mật cần gửi
@@ -153,30 +154,32 @@ void loop() {
 
     ledDisableHoldState();
 
+    Serial.println(sp);
+
     // So sánh với giá trị hiện tại
     if (sp <= temperatureC) {
-      digitalWrite(25, HIGH);
-      digitalWrite(26, LOW);
-      digitalWrite(27, LOW);
+      digitalWrite(LED_SP_NORMAL, LOW);
+      digitalWrite(LED_SP_MEDIUM, LOW);
+      digitalWrite(LED_SP_HIGH, HIGH);
     }
 
     if (sp > temperatureC && (sp - temperatureC) < 10) {
-      digitalWrite(25, LOW);
-      digitalWrite(26, HIGH);
-      digitalWrite(27, LOW);
+      digitalWrite(LED_SP_NORMAL, LOW);
+      digitalWrite(LED_SP_MEDIUM, HIGH);
+      digitalWrite(LED_SP_HIGH, LOW);
     }
 
-    if (sp > temperatureC && (sp - temperatureC) < 20) {
-      digitalWrite(25, LOW);
-      digitalWrite(26, LOW);
-      digitalWrite(27, HIGH);
+    if (sp > temperatureC && (sp - temperatureC) >= 10) {
+      digitalWrite(LED_SP_NORMAL, HIGH);
+      digitalWrite(LED_SP_MEDIUM, LOW);
+      digitalWrite(LED_SP_HIGH, LOW);
     }
 
     // In ra response trả về từ server
     Serial.println(resString2);
 
     // Xóa bộ nhớ và ngủ
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_0, 1);
+    esp_sleep_enable_ext0_wakeup(BUTTON_MEASURE, 1);
     esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
 
     _state = STATE_DISABLE;

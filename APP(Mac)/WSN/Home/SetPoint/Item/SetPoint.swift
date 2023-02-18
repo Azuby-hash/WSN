@@ -84,7 +84,7 @@ class SetPoint: UIView {
             let formatter2 = DateFormatter()
             formatter2.dateFormat = "dd-MM-yyyy"
             
-            line1.text = "ESP\(Int(id)!): \(temp.getValue())\(temp.getCol().getUnit()) at \(formatter.string(from: date)) \(formatter2.string(from: date))"
+            line1.text = "ESP\(Int(id)! + 1): \(temp.getValue())\(temp.getCol().getUnit()) at \(formatter.string(from: date)) \(formatter2.string(from: date))"
             line2.text = "Threshold cross: \(temp.getValue() > value)"
             
             curSP.text = "\(value)"

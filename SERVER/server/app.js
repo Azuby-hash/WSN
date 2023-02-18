@@ -37,11 +37,11 @@ app.post(`/espPost`, (req, res) => {
             }
             // espSP3
             // console.log(key);
-            console.log(value);
+            console.log(`ESP${isSP ? "SP" : ""}${number + 1}: ${value}`);
 
             if (json[key] == undefined) {
                 json[key] = [];
-                json[sup] = [40];
+                json[sup] = [{value: 40, date: Date.now() / 1000}];
             }
 
             json[key] = [...json[key], {value: value, date: Date.now() / 1000}]

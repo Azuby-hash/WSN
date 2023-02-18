@@ -1,4 +1,5 @@
 #include <httpProtocol.h>
+#include <main.h>
 
 // GET request HTTP
 String httpGETRequest(String serverName) {
@@ -38,10 +39,10 @@ String httpPOSTRequest(String serverName, String param) {
   http.begin(serverName);
   http.addHeader("Content-Type", "application/json");
 
-  digitalWrite(21, HIGH);
+  digitalWrite(LED_ON_REQUEST, HIGH);
   // Send HTTP POST request
   int httpResponseCode = http.POST(param);
-  digitalWrite(21, LOW);
+  digitalWrite(LED_ON_REQUEST, LOW);
 
   Serial.println(param);
   

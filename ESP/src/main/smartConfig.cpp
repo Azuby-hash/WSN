@@ -1,6 +1,7 @@
 #include "WiFi.h"
 #include "httpProtocol.h"
 #include "string.h"
+#include "main.h"
 
 String server;
 
@@ -98,20 +99,20 @@ void serverHostConfig() {
     server = ip;
     Serial.println(rq);
     Serial.println("Config done!");
-    digitalWrite(2, LOW);
+    digitalWrite(LED_ON_ACTIVE, LOW);
     delay(500);
-    digitalWrite(2, HIGH);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
     delay(500);
-    digitalWrite(2, LOW);
+    digitalWrite(LED_ON_ACTIVE, LOW);
     delay(500);
-    digitalWrite(2, HIGH);
+    digitalWrite(LED_ON_ACTIVE, HIGH);
     return;
   }
   // Nếu sai nháy đèn D2 1 phát và kiểm tra lại
 
-  digitalWrite(2, LOW);
+  digitalWrite(LED_ON_ACTIVE, LOW);
   delay(500);
-  digitalWrite(2, HIGH);
+  digitalWrite(LED_ON_ACTIVE, HIGH);
   delay(2000);
 
   serverHostConfig();
@@ -135,7 +136,7 @@ void wifiSmartConfig() {
       delay(500);
       Serial.print(".");
     }
-    digitalWrite(2, LOW);
+    digitalWrite(LED_ON_ACTIVE, LOW);
     return;
   }
   // Nếu không thì smart config
