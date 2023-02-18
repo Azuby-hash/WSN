@@ -15,7 +15,7 @@ unsigned long _time2 = 0;
 RTC_DATA_ATTR float sp = 0;
 
 enum STATE {
-  STATE_DISABLE, STATE_CLICK, STATE_ENABLE, STATE_AUTO
+  STATE_DISABLE, STATE_CLICK, STATE_ENABLE
 };
 
 RTC_DATA_ATTR bool _isFirstTime = true;
