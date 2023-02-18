@@ -38,10 +38,10 @@ String httpPOSTRequest(String serverName, String param) {
   http.begin(serverName);
   http.addHeader("Content-Type", "application/json");
 
-  digitalWrite(5, HIGH);
+  digitalWrite(21, HIGH);
   // Send HTTP POST request
   int httpResponseCode = http.POST(param);
-  digitalWrite(5, LOW);
+  digitalWrite(21, LOW);
 
   Serial.println(param);
   

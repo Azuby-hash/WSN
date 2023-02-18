@@ -11,6 +11,8 @@
 unsigned long _time = 0;
 unsigned long _time2 = 0;
 
+RTC_DATA_ATTR float sp = 0;
+
 // Config chế độ đọc tín hiệu 1 dây
 OneWire oneWire(4);
 
@@ -59,8 +61,8 @@ void setup() {
   pinMode(25, OUTPUT);
   pinMode(26, OUTPUT);
   pinMode(27, OUTPUT);
-  pinMode(5, OUTPUT);
-  digitalWrite(5, LOW);
+  pinMode(21, OUTPUT);
+  digitalWrite(21, LOW);
 
   // Đèn D2 sáng trong thời gian thức
   pinMode(2, OUTPUT);
@@ -126,7 +128,7 @@ void loop() {
     
     // Response trả về setpoint, convert ra float
     deserializeJson(doc, resString2);
-    float sp = doc.as<float>();
+    sp = doc.as<float>();
 
     ledDisableHoldState();
 
