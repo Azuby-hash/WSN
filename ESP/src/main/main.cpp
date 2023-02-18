@@ -12,6 +12,8 @@
 unsigned long _time = 0;
 unsigned long _time2 = 0;
 
+RTC_DATA_ATTR float sp = 0;
+
 enum STATE {
   STATE_DISABLE, STATE_CLICK, STATE_ENABLE, STATE_AUTO
 };
@@ -74,8 +76,8 @@ void setup() {
   pinMode(25, OUTPUT);
   pinMode(26, OUTPUT);
   pinMode(27, OUTPUT);
-  pinMode(5, OUTPUT);
-  digitalWrite(5, LOW); 
+  pinMode(21, OUTPUT);
+  digitalWrite(21, LOW);
 
   pinMode(0, INPUT_PULLUP);
   digitalWrite(2, HIGH);
@@ -147,7 +149,7 @@ void loop() {
     
     // Response trả về setpoint, convert ra float
     deserializeJson(doc, resString2);
-    float sp = doc.as<float>();
+    sp = doc.as<float>();
 
     ledDisableHoldState();
 
