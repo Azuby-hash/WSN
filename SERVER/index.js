@@ -1,5 +1,4 @@
 const host = require('./server/host.js');
-const cert = require('./server/cert.js');
 const app = require('./server/app.js');
 const http = require('http');
 const https = require('https');
@@ -8,6 +7,7 @@ const https = require('https');
 
 const server = http.createServer(app.app);
 
+// Tạo server lắng nghe
 server.listen(host.port, host.hostname, () => {
     console.log(`Server running at http://${host.hostname}:${host.port}`)
 });

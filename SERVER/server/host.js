@@ -21,7 +21,7 @@ for (const name of Object.keys(nets)) {
 
 
 const port = 3000; 
-const hostname = (results["en0"] ?? results["en1"])[0];
+const hostname = (results["en0"] ?? results["en1"] ?? results[Object.keys(results)[0]])[0];
 
 // ----------------------------------------------------------------
 

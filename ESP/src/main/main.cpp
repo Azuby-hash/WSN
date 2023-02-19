@@ -58,12 +58,16 @@ void print_wakeup_reason(){
 }
 
 void ledEnableHoldState() {
+  // Bật khóa trạng thái led
+
   gpio_hold_en(LED_SP_NORMAL);
   gpio_hold_en(LED_SP_MEDIUM);
   gpio_hold_en(LED_SP_HIGH);
 }
 
 void ledDisableHoldState() {
+  // Tắt khóa trạng thái led
+
   gpio_hold_dis(LED_SP_NORMAL);
   gpio_hold_dis(LED_SP_MEDIUM);
   gpio_hold_dis(LED_SP_HIGH);
