@@ -144,7 +144,7 @@ void wifiSmartConfig() {
   // Nếu không thì smart config
 
   /* start SmartConfig */
-  WiFi.beginSmartConfig(SC_TYPE_ESPTOUCH_V2, "0000000000000000");
+  WiFi.beginSmartConfig(SC_TYPE_ESPTOUCH_V2, (char *)"0000000000000000");
  
   /* Wait for SmartConfig packet from mobile */
   Serial.println("Waiting for SmartConfig.");
