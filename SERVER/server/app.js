@@ -9,15 +9,10 @@ module.exports = {
     app: app,
 }
 
-app.use(express.static('client'));
 app.use(express.static('server'));
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-app.get('/', (req, res) => {
-    res.send(200);
-});
 
 app.post(`/espPost`, (req, res) => {
     const value = req.body.value
