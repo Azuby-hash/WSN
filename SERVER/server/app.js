@@ -115,6 +115,6 @@ app.post('/espConfig', (req, res) => {
 
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Content-type,Accept');
-        res.send(`Authorized`)
+        res.send(password)
     }
 })

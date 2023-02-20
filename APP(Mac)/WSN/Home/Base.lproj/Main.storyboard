@@ -156,40 +156,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixN-rj-ibU">
-                                <rect key="frame" x="30" y="30" width="222" height="35"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tCr-41-RHW" customClass="ServerConfig" customModule="WSN" customModuleProvider="target">
-                                        <rect key="frame" x="21" y="0.0" width="180" height="35"/>
-                                        <color key="tintColor" name="Sub_Red"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="180" id="PSH-If-S23"/>
-                                            <constraint firstAttribute="height" constant="35" id="SIk-Sf-GXr"/>
-                                        </constraints>
-                                        <color key="textColor" name="White"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerCurve" value="continuous"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderIBColor">
-                                                <color key="value" name="White"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="tCr-41-RHW" firstAttribute="centerY" secondItem="ixN-rj-ibU" secondAttribute="centerY" id="HbU-hE-uW3"/>
-                                    <constraint firstAttribute="height" constant="35" id="LLo-F3-pnp"/>
-                                    <constraint firstItem="tCr-41-RHW" firstAttribute="centerX" secondItem="ixN-rj-ibU" secondAttribute="centerX" id="iMJ-kA-icx"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIE-2D-stT">
                                 <rect key="frame" x="548" y="30" width="222" height="35"/>
                                 <subviews>
@@ -228,7 +194,6 @@
                         <constraints>
                             <constraint firstItem="YwP-L4-JIw" firstAttribute="bottom" secondItem="HW8-Ov-6n9" secondAttribute="bottom" id="3HH-1d-IHq"/>
                             <constraint firstItem="YwP-L4-JIw" firstAttribute="trailing" secondItem="vIE-2D-stT" secondAttribute="trailing" constant="30" id="4Vb-su-vnJ"/>
-                            <constraint firstItem="IBC-Wv-XvM" firstAttribute="leading" secondItem="ixN-rj-ibU" secondAttribute="trailing" constant="30" id="5Fu-O1-tEY"/>
                             <constraint firstItem="vIE-2D-stT" firstAttribute="leading" secondItem="IBC-Wv-XvM" secondAttribute="trailing" constant="30" id="7LV-jX-t0D"/>
                             <constraint firstItem="HW8-Ov-6n9" firstAttribute="top" secondItem="YwP-L4-JIw" secondAttribute="top" id="8lh-WR-uIN"/>
                             <constraint firstItem="IBC-Wv-XvM" firstAttribute="width" relation="lessThanOrEqual" secondItem="CHu-JI-bW3" secondAttribute="width" constant="-68" id="DjY-g5-51F"/>
@@ -238,11 +203,9 @@
                             <constraint firstItem="YwP-L4-JIw" firstAttribute="top" secondItem="CnC-Xb-dFP" secondAttribute="top" id="aTn-qC-vaJ"/>
                             <constraint firstItem="HW8-Ov-6n9" firstAttribute="leading" secondItem="YwP-L4-JIw" secondAttribute="leading" id="dcU-ET-LTl"/>
                             <constraint firstItem="n0e-dB-D2q" firstAttribute="top" secondItem="YwP-L4-JIw" secondAttribute="top" id="dcs-eX-IKX"/>
-                            <constraint firstItem="ixN-rj-ibU" firstAttribute="leading" secondItem="YwP-L4-JIw" secondAttribute="leading" constant="30" id="f3t-NQ-RWc"/>
                             <constraint firstItem="YwP-L4-JIw" firstAttribute="bottom" secondItem="n0e-dB-D2q" secondAttribute="bottom" id="fUB-1b-LQi"/>
                             <constraint firstItem="IBC-Wv-XvM" firstAttribute="top" secondItem="YwP-L4-JIw" secondAttribute="top" constant="-20" id="iaB-Pw-PXA"/>
                             <constraint firstItem="YwP-L4-JIw" firstAttribute="trailing" secondItem="n0e-dB-D2q" secondAttribute="trailing" id="jDL-mt-Vbr"/>
-                            <constraint firstItem="YwP-L4-JIw" firstAttribute="top" secondItem="ixN-rj-ibU" secondAttribute="top" constant="-30" id="l6V-ZS-nKU"/>
                             <constraint firstItem="vIE-2D-stT" firstAttribute="top" secondItem="YwP-L4-JIw" secondAttribute="top" constant="30" id="pDj-oE-IgI"/>
                         </constraints>
                     </view>
@@ -264,9 +227,6 @@
         </namedColor>
         <namedColor name="Purple">
             <color red="0.47499999403953552" green="0.41600000858306885" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Sub_Red">
-            <color red="1" green="0.23100000619888306" blue="0.18799999356269836" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UnSeen_Line">
             <color red="1" green="1" blue="1" alpha="0.30000001192092896" colorSpace="custom" customColorSpace="sRGB"/>

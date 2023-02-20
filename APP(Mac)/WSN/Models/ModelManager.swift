@@ -12,16 +12,12 @@ class ModelManager {
     
     static let shared = ModelManager()
 
-    private var server = "192.168.1.78:3000"
+    private var server = "127.0.0.1:3000"
     
     private let decoder = JSONDecoder()
     private let storage = Storage()
     
     weak var req: DataRequest?
-    
-    func setServer(_ string: String) {
-        server = string
-    }
     
     func fetch(_ time: CGFloat = 5) {
         req?.cancel()

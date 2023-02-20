@@ -4,6 +4,7 @@
 #include "WiFi.h"
 
 extern String server;
+extern String serverPassword;
 
 void wifiSmartConfig();
 

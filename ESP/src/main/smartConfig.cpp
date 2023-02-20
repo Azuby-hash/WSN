@@ -9,6 +9,8 @@ RTC_DATA_ATTR uint8_t rvd_data[33] = { 0 }; // IP server
 RTC_DATA_ATTR uint8_t ssid[33] = { 0 }; // Ten WiFi
 RTC_DATA_ATTR uint8_t password[65] = { 0 }; // Password Wifi
 
+String serverPassword = "9797964a-2f5c-41c6-91c1-44aa68308631";
+
 unsigned long _time3 = 0;
 
 void wifiSmartConfig();
@@ -91,9 +93,9 @@ void serverHostConfig() {
 
   // Request để test xem IP gửi về rvd_data có đúng không
   String rq = "http://" + ip + "/espConfig";
-  String res = httpPOSTRequest(rq, "{\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\"}");
+  String res = httpPOSTRequest(rq, "{\"password\":\"" + serverPassword + "\"}");
 
-  if (res == "Authorized") {
+  if (res == serverPassword) {
     // Nếu đúng nháy đèn D2 2 phát và lưu vào biến server
 
     server = ip;

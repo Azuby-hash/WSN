@@ -140,7 +140,7 @@ void loop() {
     String reqString1 = "http://" + server + "/espPost";
 
     // JSON chứa index node hiện tại, giá trị và bảo mật cần gửi
-    String json1 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\", \"value\":" ;
+    String json1 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"" + serverPassword + "\", \"value\":" ;
     json1 = json1 + temperatureC;
     json1 = json1 + "}";
 
@@ -154,7 +154,7 @@ void loop() {
     String reqString2 = "http://" + server + "/espGet";
 
     // JSON chứa bảo mật cần gửi
-    String json2 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"9797964a-2f5c-41c6-91c1-44aa68308631\", \"isSP\": true}" ;
+    String json2 = "{\"number\":" + (String)NODE_ID + ",\"password\":\"" + serverPassword + "\", \"isSP\": true}" ;
 
     // Request post lên server
     String resString2 = httpPOSTRequest(reqString2, json2);
