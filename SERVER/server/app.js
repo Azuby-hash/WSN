@@ -11,7 +11,6 @@ module.exports = {
     app: app,
 }
 
-app.use(express.static('client'));
 app.use(express.static('server'));
 
 app.use(express.json())
