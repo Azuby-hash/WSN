@@ -12,7 +12,7 @@ class ModelManager {
     
     static let shared = ModelManager()
 
-    private var server = "192.168.1.153:3000"
+    private var server = "192.168.1.78:3000"
     
     private let decoder = JSONDecoder()
     private let storage = Storage()

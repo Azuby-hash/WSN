@@ -31,10 +31,8 @@ app.post(`/espPost`, (req, res) => {
             
             // Lấy key của node
             var key = `esp${number + 1}`
-            var sup = `espSP${number + 1}`
             if (isSP) {
                 key = `espSP${number + 1}`
-                sup = `esp${number + 1}`
             }
             
             // In ra giá trị
@@ -42,8 +40,8 @@ app.post(`/espPost`, (req, res) => {
 
             // Tạo trường mới nếu không tồn tại (node mới)
             if (json[key] == undefined) {
-                json[key] = [];
-                json[sup] = [{value: 40, date: Date.now() / 1000}];
+                json[`esp${number + 1}`] = [];
+                json[`espSP${number + 1}`] = [{value: 40, date: Date.now() / 1000}];
             }
 
             // Thêm giá trị vào array để lưu trữ

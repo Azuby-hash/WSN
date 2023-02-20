@@ -7,7 +7,7 @@
 #include <ArduinoJson.h>
 #include <main.h>
 
-#define NODE_ID 4 // From 1 to n
+#define NODE_ID 1 // From 1 to n
 #define SLEEP_TIME_MEASURE 14
 
 unsigned long _time = 0;
@@ -93,6 +93,13 @@ void setup() {
   Serial.println(_state);
 
   if (_state == STATE_DISABLE) {
+    if (_isFirstTime) {
+      // Smart config trc khi ngủ
+
+      _isFirstTime = false;
+      wifiSmartConfig();
+    }
+
     esp_sleep_enable_ext0_wakeup(BUTTON_MEASURE, 0);
     esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
 

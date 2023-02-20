@@ -8,6 +8,6 @@ const https = require('https');
 const server = http.createServer(app.app);
 
 // Tạo server lắng nghe
-server.listen(host.port, host.hostname, () => {
+server.listen(host.port, () => {
     console.log(`Server running at http://${host.hostname}:${host.port}`)
 });
