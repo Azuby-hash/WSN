@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Popup hiện thông tin nhiệt độ
 class ChartPopup: UIView {
 
     @IBOutlet weak var line1: UILabel!

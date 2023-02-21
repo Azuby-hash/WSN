@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Bảng hiện nhiệt độ
 class Table: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var col: UICollectionView!
     @IBOutlet weak var currentValue: UILabel!

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Tạo bảng set ngưỡng
 class SetPoint: UIView {
     
     private var didLoad = false

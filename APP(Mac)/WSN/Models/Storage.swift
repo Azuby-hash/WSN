@@ -8,6 +8,8 @@
 import UIKit
 
 class Storage {
+    
+    // Giá trị lưu nhiệt độ
     private var temp: [StorageValueCollection] = {
         var arr = [StorageValueCollection]()
 
@@ -17,6 +19,8 @@ class Storage {
         
         return arr
     }()
+    
+    // Giá trị lưu ngưỡng
     private var tempSP: [StorageSetPoint] = {
         var arr = [StorageSetPoint]()
 
@@ -27,6 +31,7 @@ class Storage {
         return arr
     }()
     
+    // Tách dữ liệu vào các biến chứa
     func descriptObject(_ object: [String: [Feed]]) {
         for key in object.keys {
             if (!key.contains("SP")) {
@@ -92,6 +97,8 @@ class StorageValueCollection {
     
     func setValues(_ values: [StorageValue]) {
         self.values = values
+        
+        // Cập nhật UI khi thay đổi giá trị
         NotificationCenter.default.post(name: Notification.Name("storage.update"), object: nil)
     }
     
@@ -207,6 +214,8 @@ class StorageSetPoint: Equatable {
     
     func setValue(_ value: CGFloat) {
         self.value = value
+        
+        // Cập nhật UI khi thay đổi giá trị
         NotificationCenter.default.post(name: Notification.Name("storage.update"), object: nil)
     }
     

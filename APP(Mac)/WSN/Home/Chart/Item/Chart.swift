@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Chứa đồ thị và cho phép scroll
 class Chart: UIView, UIScrollViewDelegate {
     
     private var didLoad = false

@@ -12,6 +12,7 @@ class ModelManager {
     
     static let shared = ModelManager()
 
+    // Địa chỉ server
     private var server = "127.0.0.1:3000"
     
     private let decoder = JSONDecoder()
@@ -19,6 +20,7 @@ class ModelManager {
     
     weak var req: DataRequest?
     
+    // Lấy dữ liệu tất cả các node từ server 5s 1 lần
     func fetch(_ time: CGFloat = 5) {
         req?.cancel()
         
@@ -57,7 +59,7 @@ class ModelManager {
         }
     }
     
-    /// WARNING: Do not run outside model
+    // POST ngưỡng lên server
     func post(_ data: (number: Int, value: CGFloat)) {
         req?.cancel()
 

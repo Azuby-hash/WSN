@@ -8,6 +8,7 @@
 import UIKit
 
 extension CALayer {
+    // Border view có thể gán bên ngoài storyboard
     open override func setValue(_ value: Any?, forKey key: String) {
         guard key == "borderIBColor", let color = value as? UIColor else {
             super.setValue(value, forKey: key)
@@ -23,12 +24,14 @@ class Home: UIViewController {
         super.viewDidLoad()
     }
     
+    // Xuất file excel
     @IBAction func exportExcel(_ button: UIButton) {
         let exporter = ExportXlsxService.init()
         exporter.export()
 
         let url = NSURL.fileURL(withPath: "\(exporter.filePath())/\(exporter.filename)")
         
+        // Bật popup lưu file
         let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         ac.popoverPresentationController?.sourceView = button
         ac.popoverPresentationController?.sourceRect = button.bounds
@@ -39,6 +42,7 @@ class Home: UIViewController {
         present(ac, animated: true)
     }
     
+    // Alert hoàn thành lưu file
     func saveImageFinish(_ success: Bool) {
         let alert = UIAlertController(title: success ? "Saved" : "Error",
                                       message: success ? "Excel is exported!" : "Error export!",

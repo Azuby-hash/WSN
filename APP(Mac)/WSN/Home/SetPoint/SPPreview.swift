@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Chứa các bảng set ngưỡng
 class SPPreview: UIViewPointSubview {
 
     @IBOutlet weak var SPList: UIStackViewForwardPointSubview!

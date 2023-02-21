@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Vẽ đồ thị
 class ChartDraw: UIView {
     private let INSET: CGFloat = 35
     

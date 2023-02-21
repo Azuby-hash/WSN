@@ -9,23 +9,21 @@ import UIKit
 import xlsxwriter
 
 class ExportXlsxService {
-    let filename = "data.xlsx"
-    let cell_width: Double = 64
-    let cell_height: Double = 50
+    let filename = "data.xlsx" // Tên file
 
-    var workbook: UnsafeMutablePointer<lxw_workbook>?
-    var worksheet: UnsafeMutablePointer<lxw_worksheet>?
-    var format_header: UnsafeMutablePointer<lxw_format>?
-    var format_1: UnsafeMutablePointer<lxw_format>?
+    var workbook: UnsafeMutablePointer<lxw_workbook>? // file excel mới
+    var worksheet: UnsafeMutablePointer<lxw_worksheet>? // sheet mới trong file excel
+    var format_header: UnsafeMutablePointer<lxw_format>? // format cho header
+    var format_1: UnsafeMutablePointer<lxw_format>? // format cho các dòng
     
     private var writingLine: UInt32 = 0
-    private var needWriterPreparation = false
+    private var needWriterPreparation = false // Biến kiểm tra đã viết excel xong chưa
     
     init() {
-        prepareXlsWriter()
+        prepareXlsWriter() // Khởi tạo excel
     }
     
-    /// Get the sandbox directory
+    // Đường dẫn lưu tạm file
     func filePath() -> String {
         guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("WSN")
         else { return "" }
@@ -37,7 +35,7 @@ class ExportXlsxService {
         return path.path
     }
     
-    /// Prepare the xlsx objects
+    // Tạo excel mới
     private func prepareXlsWriter() {
         print("open \(filePath())")
         var destination_path = filePath()
@@ -54,7 +52,7 @@ class ExportXlsxService {
         needWriterPreparation = false
     }
     
-    /// The first line is the header, we use bold style, and we write the column titles
+    // Tạo header
     private func buildHeader(name: String) {
         worksheet = workbook_add_worksheet(workbook, name)
 
@@ -63,7 +61,7 @@ class ExportXlsxService {
         worksheet_write_string(worksheet, writingLine, 1, "Measure time", format_header)
     }
     
-    /// Create and write / overwrite the xlsx file
+    // Xuất file excel
     func export() {
         if(needWriterPreparation == true){
             prepareXlsWriter()
@@ -81,13 +79,14 @@ class ExportXlsxService {
             writingLine = 0
         }
     
-        // Closing the workbook will save the xlsx file on the filesystem
+        // Đóng excel
         workbook_close(workbook)
         needWriterPreparation = true
         
         print(filePath())
     }
     
+    // Tạo dòng mới
     private func buildNewLine(product: ESP) {
         writingLine += 1
         

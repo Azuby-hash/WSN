@@ -23,6 +23,7 @@ class ChartPreview: UIViewPointSubview {
         commonInit()
     }
     
+    // Khởi tạo view từ UINib
     private func commonInit() {
         let nib = UINib(nibName: "ChartPreview", bundle: nil)
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else { return }
@@ -53,6 +54,7 @@ class ChartPreview: UIViewPointSubview {
             view.removeFromSuperview()
         }
         
+        // Tạo view chứa biểu đồ và bảng tương ứng
         for index in 0..<ModelManager.shared.getStorage().getCount() {
             let chart = Chart()
 //            chart.isHidden = true
@@ -88,6 +90,8 @@ class ChartPreview: UIViewPointSubview {
         layoutIfNeeded()
         NotificationCenter.default.addObserver(self, selector: #selector(touch), name: Notification.Name("stackview.hightlight."), object: nil)
     }
+    
+    // Để view bấm được khi đúng tab
     @objc func touch(_ noti: Notification) {
         guard let index = noti.object as? Int else { return }
         
