@@ -7,7 +7,7 @@
 #include <ArduinoJson.h>
 #include <main.h>
 
-#define NODE_ID 1 // From 1 to n
+#define NODE_ID 4 // From 1 to n
 #define SLEEP_TIME_MEASURE 14
 
 unsigned long _time = 0;
@@ -28,7 +28,7 @@ RTC_DATA_ATTR STATE _state = STATE_DISABLE;
 */
 
 // Config chế độ đọc tín hiệu 1 dây
-OneWire oneWire(4);
+OneWire oneWire(DS18B20_WIRE);
 
 // Tạo 1 handler đo thông qua dây đã config
 DallasTemperature sensors(&oneWire);
